@@ -5,10 +5,10 @@
    <div class="name">
      <p>ログイン</p>
      <div class="form">
-       <input placeholder="メールアドレス" type="email" />
-       <input placeholder="パスワード" type="password" />
-       <button>ログイン</button>
-       <p><a @click="$router.push('/about')">パスワードをお忘れの方はこちら</a></p>
+       <input placeholder="メールアドレス" type="email" v-model="email" />
+       <input placeholder="パスワード" type="password" v-model="password"/>
+       <button @click="auth">ログイン</button>
+       <p><a @click="$router.push('/About')">パスワードをお忘れの方はこちら</a></p>
      </div>
    </div>
    <Footer />
@@ -20,11 +20,25 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 export default {
-    components:{
-        Header,
-        Footer
-    }   
-}
+  date(){
+    return{
+      email:"",
+      password:""
+    };
+  },
+  components:{
+    Header,
+    Footer
+  },
+  methods:{
+    auth(){
+      this.$store.dispatch("login",{
+        email: this.email,
+        password: this.password
+      });
+    }
+  }   
+};
 </script>
 
 <style scoped>
